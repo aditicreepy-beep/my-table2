@@ -1,45 +1,613 @@
+```html
 <!DOCTYPE html>
+<html lang="en">
 
-<html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Data Table</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Amit Automobile | Hero Dealership</title>
+
     <style>
-        body {
+        /* GENERAL STYLING */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
-            padding: 20px;
         }
-        table {
-            border-collapse: collapse;
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fff0f3, #ffe0b2, #dbeafe);
+            color: #222;
+        }
+
+        /* HEADER */
+
+        header {
+            background: white;
+            padding: 20px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 3px 12px #0002;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .brand img {
+            width: 75px;
+            height: 65px;
+            object-fit: contain;
+        }
+
+        .brand h1 {
+            color: #e31837;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #222;
+            margin: 8px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #e31837;
+        }
+
+        /* HERO BANNER */
+
+        .hero {
+            text-align: center;
+            padding: 65px 20px;
+            background: linear-gradient(
+                120deg,
+                #ff9a9e,
+                #fad0c4,
+                #fbc2eb,
+                #a1c4fd
+            );
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            color: #9d1028;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 19px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .hero h3 {
+            font-size: 28px;
+            color: #222;
+        }
+
+        /* MOTORCYCLE AND SCOOTER IMAGES */
+
+        .vehicle-gallery {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            padding: 35px 20px;
+        }
+
+        .vehicle-gallery img {
             width: 100%;
+            max-width: 400px;
+            height: 250px;
+            object-fit: contain;
+            background: #ffffffb8;
+            border-radius: 18px;
+            padding: 10px;
+            transition: transform 0.3s;
         }
-        th, td {
-            border: 1px solid #333;
-            padding: 12px;
-            text-align: left;
+
+        .vehicle-gallery img:hover {
+            transform: scale(1.04);
         }
-        th {
-            background-color: #4CAF50;
+
+        /* SERVICE AND PURCHASE CARDS */
+
+        .choices {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: wrap;
+            gap: 25px;
+            padding: 30px 20px;
+        }
+
+        .card {
+            width: 320px;
+            padding: 30px 22px;
+            border-radius: 20px;
+            text-align: center;
+            background: white;
+            box-shadow: 0 8px 20px #0002;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px #0003;
+        }
+
+        .service {
+            border-top: 8px solid #1769ff;
+        }
+
+        .purchase {
+            border-top: 8px solid #e31837;
+        }
+
+        .card h3 {
+            font-size: 27px;
+            margin-bottom: 18px;
+        }
+
+        .card p {
+            line-height: 1.8;
+            margin-bottom: 22px;
+        }
+
+        button {
+            padding: 13px 25px;
+            border: none;
+            border-radius: 30px;
             color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s, transform 0.3s;
         }
+
+        button:hover {
+            opacity: 0.85;
+            transform: scale(1.03);
+        }
+
+        .service button {
+            background: #1769ff;
+        }
+
+        .purchase button {
+            background: #e31837;
+        }
+
+        /* INTERACTIVE INFORMATION SECTION */
+
+        #result {
+            display: none;
+            max-width: 750px;
+            margin: 25px auto;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 5px 18px #0002;
+        }
+
+        #result h2 {
+            color: #e31837;
+            margin-bottom: 18px;
+        }
+
+        #result p {
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 12px 22px;
+            margin: 6px;
+            border-radius: 25px;
+            background: #198754;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .close-button {
+            background: #555;
+        }
+
+        /* CONTACT SECTION */
+
+        .contact {
+            background: white;
+            margin: 35px auto;
+            padding: 35px 20px;
+            text-align: center;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px #0002;
+        }
+
+        .contact h2 {
+            color: #e31837;
+            margin-bottom: 20px;
+            font-size: 30px;
+        }
+
+        .contact p {
+            line-height: 2;
+        }
+
+        .contact a {
+            color: #1769ff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: linear-gradient(90deg, #9d1028, #ed1c24);
+            color: white;
+            padding: 28px 15px;
+            text-align: center;
+            line-height: 1.9;
+        }
+
+        /* MOBILE RESPONSIVENESS */
+
+        @media (max-width: 600px) {
+
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .brand {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .brand h1 {
+                font-size: 24px;
+            }
+
+            nav {
+                line-height: 2.5;
+            }
+
+            .hero h2 {
+                font-size: 30px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .hero h3 {
+                font-size: 22px;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 350px;
+            }
+
+            #result {
+                margin: 20px;
+            }
+
+            .vehicle-gallery img {
+                height: 210px;
+            }
+        }
+
     </style>
 </head>
+
 <body>
 
-<h2>My Data</h2>
+    <!-- HEADER WITH HERO LOGO -->
 
-<table>
-    <tr>
-        <td>Aditi Gupta</td>
-        <td>X</td>
-        <td>C</td>
-    </tr>
-    <tr>
-        <td>Shakti Yadav</td>
-        <td>X</td>
-        <td>D</td>
-    </tr>
-</table>
+    <header>
+
+        <div class="brand">
+
+            <img
+                src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Hero_MotoCorp_Logo.svg"
+                alt="Hero MotoCorp Logo"
+            >
+
+            <h1>Amit Automobile</h1>
+
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+    </header>
+
+
+    <!-- MAIN BANNER -->
+
+    <section class="hero" id="home">
+
+        <h2>Your Trusted Hero Dealership</h2>
+
+        <p>
+            Welcome to Amit Automobile!<br>
+            Your destination for two-wheelers, expert servicing
+            and a better riding experience.
+        </p>
+
+        <h3>Buy • Service • Ride Better</h3>
+
+    </section>
+
+
+    <!-- VEHICLE PICTURES -->
+
+    <section class="vehicle-gallery">
+
+        <img
+            src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80"
+            alt="Motorcycle"
+        >
+
+        <img
+            src="https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?auto=format&fit=crop&w=800&q=80"
+            alt="Two-wheeler"
+        >
+
+    </section>
+
+
+    <!-- CUSTOMER CHOICES -->
+
+    <section class="choices" id="services">
+
+        <!-- SERVICING -->
+
+        <div class="card service">
+
+            <h3>🔧 Servicing</h3>
+
+            <p>
+                Keep your bike or scooty in excellent condition
+                with professional servicing and maintenance.
+                Contact us for your service requirements.
+            </p>
+
+            <button onclick="showDetails('service')">
+                Book Servicing →
+            </button>
+
+        </div>
+
+
+        <!-- PURCHASE -->
+
+        <div class="card purchase">
+
+            <h3>🏍️ Purchase</h3>
+
+            <p>
+                Looking for a new Hero bike or scooty?
+                Contact our showroom to enquire about models,
+                prices, colours and test rides.
+            </p>
+
+            <button onclick="showDetails('purchase')">
+                Explore Vehicles →
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- INTERACTIVE RESULT -->
+
+    <section id="result">
+
+        <h2 id="resultTitle"></h2>
+
+        <p id="resultText"></p>
+
+        <a
+            id="callButton"
+            class="contact-button"
+            href="tel:7007631313"
+        >
+            📞 Call Amit Automobile
+        </a>
+
+        <a
+            id="whatsappButton"
+            class="contact-button"
+            href="https://wa.me/917007631313"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            WhatsApp Us
+        </a>
+
+        <br><br>
+
+        <button class="close-button" onclick="closeDetails()">
+            Close
+        </button>
+
+    </section>
+
+
+    <!-- CONTACT INFORMATION -->
+
+    <section class="contact" id="contact">
+
+        <h2>Contact Us</h2>
+
+        <p>
+
+            <strong>Amit Automobile</strong><br>
+
+            Hero Two-Wheeler Dealership<br>
+
+            Pharenda, Maharajganj, Uttar Pradesh<br>
+
+            <strong>Phone:</strong>
+            <a href="tel:7007631313">7007631313</a>
+
+        </p>
+
+        <br>
+
+        <p>
+            Need a new bike or scooty?<br>
+            Looking for servicing or maintenance?<br>
+            We are here to help!
+        </p>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h3>Amit Automobile</h3>
+
+        <p>
+            Genuine Parts | Expert Service | Trusted Dealership
+        </p>
+
+        <p>
+            Ride with Hero. Drive with Confidence!
+        </p>
+
+        <p>
+            Contact: 7007631313
+        </p>
+
+        <p>
+            © 2026 Amit Automobile. All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        // Dealership phone number
+        const phoneNumber = "917007631313";
+
+
+        // Show information based on the customer's choice
+
+        function showDetails(option) {
+
+            const result = document.getElementById("result");
+
+            const title = document.getElementById("resultTitle");
+
+            const text = document.getElementById("resultText");
+
+            const callButton = document.getElementById("callButton");
+
+            const whatsappButton =
+                document.getElementById("whatsappButton");
+
+
+            // Update call and WhatsApp buttons
+
+            callButton.href = "tel:+91" + phoneNumber.substring(2);
+
+
+            if (option === "service") {
+
+                title.innerHTML = "🔧 Bike & Scooty Servicing";
+
+                text.innerHTML =
+                    "Thank you for choosing Amit Automobile!<br>" +
+                    "Contact our team to enquire about servicing, " +
+                    "maintenance, oil changes and repairs.<br>" +
+                    "<strong>Call us to discuss your service requirements.</strong>";
+
+                whatsappButton.href =
+                    "https://wa.me/" + phoneNumber +
+                    "?text=" +
+                    encodeURIComponent(
+                        "Hello Amit Automobile! I would like to enquire about bike/scooty servicing."
+                    );
+
+            }
+
+            else if (option === "purchase") {
+
+                title.innerHTML = "🏍️ Find Your Next Ride!";
+
+                text.innerHTML =
+                    "Looking to buy a Hero bike or scooty?<br>" +
+                    "Contact our dealership to enquire about available " +
+                    "models, colours, prices and test rides.<br>" +
+                    "<strong>Our team will help you explore your options.</strong>";
+
+                whatsappButton.href =
+                    "https://wa.me/" + phoneNumber +
+                    "?text=" +
+                    encodeURIComponent(
+                        "Hello Amit Automobile! I would like to enquire about purchasing a Hero bike or scooty."
+                    );
+
+            }
+
+
+            // Display the result section
+
+            result.style.display = "block";
+
+            result.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        }
+
+
+        // Close the information section
+
+        function closeDetails() {
+
+            document.getElementById("result").style.display = "none";
+
+        }
+
+    </script>
 
 </body>
+
 </html>
+```
